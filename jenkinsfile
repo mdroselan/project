@@ -1,0 +1,35 @@
+pipeline{
+       agent any
+        stages{
+             stage('clean'){
+                steps {
+                      sh 'mvn clean'
+                   }
+                }
+                stage ('validate'){
+                steps {
+                      sh 'mvn validate
+                      }
+                   }
+                stage('test'){
+                   steps {
+                      sh 'mvn test -DskipTest'
+                      }
+                    }
+                      stage('package'){
+                        steps {
+                             sh 'mvn package -DskipTest'
+                      }
+                    }
+                     stage('Verify'){
+                        steps {
+                             sh 'mvn verify -DskipTest'
+                      }
+                    }
+                    stage('Install'){
+                        steps {
+                             sh 'mvn install -DskipTest'
+                      }
+                    }
+               }
+          }
